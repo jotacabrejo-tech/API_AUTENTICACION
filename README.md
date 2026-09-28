@@ -6,7 +6,7 @@
 - **Ficha:** 3336134
 
 ## Descripción
-Servicio web REST desarrollado con Node.js, Express y MongoDB para la gestión y autenticación de usuarios. En esta cuarta fase se cuenta con los servicios completos de registro de usuarios (`POST /api/auth/register`) e inicio de sesión (`POST /api/auth/login`) con hashing seguro mediante `bcryptjs`.
+Servicio web REST desarrollado con Node.js, Express y MongoDB para la gestión y autenticación de usuarios. Cuenta con los servicios completos de registro de usuarios (`POST /api/auth/register`) e inicio de sesión (`POST /api/auth/login`) con hashing seguro mediante `bcryptjs` e interfaz web cliente.
 
 ## Tecnologías Utilizadas
 - **Node.js**: Entorno de ejecución para el backend.
@@ -32,7 +32,6 @@ API_AUTENTICACION/
 │   └── styles.css
 ├── routes/
 │   └── authRoutes.js
-├── .env
 ├── .env.example
 ├── .gitignore
 ├── app.js
@@ -40,6 +39,8 @@ API_AUTENTICACION/
 ├── package-lock.json
 └── README.md
 ```
+
+> **Nota:** El archivo `.env` se crea localmente a partir de `.env.example` y está excluido del control de versiones por seguridad.
 
 ## Configuración de Variables de Entorno
 Crea un archivo `.env` en la raíz del proyecto tomando como referencia `.env.example`:

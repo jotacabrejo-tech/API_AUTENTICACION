@@ -8,7 +8,7 @@
 const mongoose = require('mongoose');
 
 /**
- * Función asíncrona encargada de conectar la aplicación con MongoDB Atlas.
+ * Función asíncrona encargada de conectar la aplicación con la base de datos MongoDB local.
  * Obtiene la cadena de conexión de forma segura desde la variable de entorno MONGODB_URI.
  * 
  * @returns {Promise<boolean>} Retorna true si la conexión fue exitosa, false si no se configuró la URI.
