@@ -1,0 +1,551 @@
+/* ====================================================================
+   Evidencia SENA: GA7-220501096-AA5-EV01
+   "Diseño y desarrollo de servicios web - caso"
+   Grupo: 6 | Ficha: 3336134
+   Estilos CSS para la interfaz web cliente de autenticación
+   ==================================================================== */
+
+:root {
+    --color-sena: #39A900;
+    --color-sena-hover: #2e8800;
+    --color-sena-glow: rgba(57, 169, 0, 0.35);
+    --color-sena-blue: #00324D;
+    
+    --bg-dark-1: #0b111e;
+    --bg-dark-2: #131d2e;
+    --card-bg: rgba(22, 33, 51, 0.85);
+    --card-border: rgba(255, 255, 255, 0.08);
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --input-bg: rgba(15, 23, 42, 0.7);
+    --input-border: rgba(255, 255, 255, 0.12);
+    --input-focus: var(--color-sena);
+    
+    --success-bg: rgba(16, 185, 129, 0.15);
+    --success-border: #10b981;
+    --success-text: #6ee7b7;
+    
+    --error-bg: rgba(239, 68, 68, 0.15);
+    --error-border: #ef4444;
+    --error-text: #fca5a5;
+
+    --info-bg: rgba(59, 130, 246, 0.15);
+    --info-border: #3b82f6;
+    --info-text: #93c5fd;
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset y caja base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    background-color: var(--bg-dark-1);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(0, 50, 77, 0.45) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(57, 169, 0, 0.25) 0px, transparent 50%),
+        linear-gradient(180deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 100%);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 16px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Elementos decorativos de fondo */
+.background-decorations {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.35;
+    animation: floatBlob 16s ease-in-out infinite alternate;
+}
+
+.blob-1 {
+    width: 380px;
+    height: 380px;
+    background: #004d73;
+    top: -100px;
+    left: -100px;
+}
+
+.blob-2 {
+    width: 320px;
+    height: 320px;
+    background: #39A900;
+    bottom: -80px;
+    right: -80px;
+    animation-delay: -8s;
+}
+
+@keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, 30px) scale(1.08); }
+}
+
+/* Contenedor principal */
+.main-container {
+    width: 100%;
+    max-width: 440px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Encabezado */
+.app-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.sena-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(57, 169, 0, 0.12);
+    border: 1px solid rgba(57, 169, 0, 0.35);
+    color: #4ade80;
+    padding: 5px 14px;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-sena);
+    box-shadow: 0 0 8px var(--color-sena);
+}
+
+.app-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.app-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Contenedor de Alertas */
+.alert-container {
+    width: 100%;
+    min-height: 0;
+    transition: all var(--transition-smooth);
+}
+
+.alert {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    line-height: 1.45;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border: 1px solid transparent;
+    animation: alertSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    margin-bottom: 4px;
+}
+
+@keyframes alertSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.alert-success {
+    background-color: var(--success-bg);
+    border-color: var(--success-border);
+    color: var(--success-text);
+}
+
+.alert-error {
+    background-color: var(--error-bg);
+    border-color: var(--error-border);
+    color: var(--error-text);
+}
+
+.alert-info {
+    background-color: var(--info-bg);
+    border-color: var(--info-border);
+    color: var(--info-text);
+}
+
+.alert-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.alert-content {
+    flex: 1;
+}
+
+/* Tarjeta de autenticación */
+.auth-card {
+    width: 100%;
+    background: var(--card-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    box-shadow: 
+        0 10px 30px -10px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Vistas conmutables */
+.auth-view {
+    display: none;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+}
+
+.auth-view.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.view-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.view-title {
+    font-size: 1.28rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.view-desc {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Formularios */
+.form-group {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    font-size: 0.95rem;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.form-input {
+    width: 100%;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    padding: 12px 42px 12px 40px;
+    font-size: 0.93rem;
+    font-family: inherit;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--input-focus);
+    background-color: rgba(15, 23, 42, 0.9);
+    box-shadow: 0 0 0 3px var(--color-sena-glow);
+}
+
+.form-input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Botón para alternar visibilidad de contraseña */
+.btn-toggle-pwd {
+    position: absolute;
+    right: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    opacity: 0.65;
+    transition: opacity var(--transition-fast);
+}
+
+.btn-toggle-pwd:hover {
+    opacity: 1;
+}
+
+/* Botones principales y secundarios */
+.btn-primary {
+    width: 100%;
+    background: linear-gradient(135deg, var(--color-sena) 0%, #2f8e00 100%);
+    border: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.94rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 13px 20px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 14px var(--color-sena-glow);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--color-sena-glow);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.btn-primary:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Spinner de carga */
+.btn-spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+}
+
+.is-loading .btn-spinner {
+    display: inline-block;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Pies de formulario y enlaces de cambio de vista */
+.view-footer {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-prompt {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+}
+
+/* Vista de Sesión Iniciada (Dashboard) */
+.session-card {
+    text-align: center;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.session-avatar {
+    width: 64px;
+    height: 64px;
+    background: var(--success-bg);
+    border: 2px solid var(--success-border);
+    color: var(--success-text);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+}
+
+.session-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.session-user-badge {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.session-user-badge strong {
+    color: #ffffff;
+    background: rgba(57, 169, 0, 0.18);
+    border: 1px solid rgba(57, 169, 0, 0.35);
+    padding: 3px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 1.05rem;
+}
+
+.session-status-box {
+    width: 100%;
+    background-color: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    text-align: left;
+}
+
+.status-indicator {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4ade80;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.dot-online {
+    width: 8px;
+    height: 8px;
+    background-color: #4ade80;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #4ade80;
+}
+
+.status-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.btn-logout {
+    margin-top: 8px;
+    width: 100%;
+}
+
+/* Pie de página institucional */
+.app-footer {
+    text-align: center;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    line-height: 1.4;
+}
+
+.app-footer code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    color: #cbd5e1;
+}
+
+/* Responsividad */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 24px 18px;
+    }
+
+    .app-title {
+        font-size: 1.45rem;
+    }
+}

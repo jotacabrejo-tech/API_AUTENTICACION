@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interfaz web cliente para la API de autenticación del SENA - ADSO. Evidencia GA7-220501096-AA5-EV01.">
+    <title>API Autenticación | SENA - ADSO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-decorations" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="main-container">
+        <!-- Encabezado Institucional SENA -->
+        <header class="app-header">
+            <div class="sena-badge">
+                <span class="badge-dot"></span>
+                <span>SENA • ADSO</span>
+            </div>
+            <h1 class="app-title">API AUTENTICACIÓN</h1>
+            <p class="app-subtitle">Evidencia GA7-220501096-AA5-EV01 • Grupo 6 • Ficha 3336134</p>
+        </header>
+
+        <!-- Contenedor de Alertas Globales -->
+        <div id="alert-container" class="alert-container" role="alert" aria-live="polite"></div>
+
+        <!-- Tarjeta Principal del Formulario -->
+        <section class="auth-card" id="auth-card">
+
+            <!-- ================= FORMULARIO DE INICIO DE SESIÓN ================= -->
+            <div id="view-login" class="auth-view active">
+                <div class="view-header">
+                    <h2 class="view-title">INICIAR SESIÓN</h2>
+                    <p class="view-desc">Ingresa tus credenciales para acceder al sistema</p>
+                </div>
+
+                <form id="form-login" novalidate autocomplete="on">
+                    <div class="form-group">
+                        <label for="login-usuario" class="form-label">Usuario</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon" aria-hidden="true">👤</span>
+                            <input 
+                                type="text" 
+                                id="login-usuario" 
+                                name="usuario" 
+                                class="form-input" 
+                                placeholder="Ingresa tu nombre de usuario"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-contrasena" class="form-label">Contraseña</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon" aria-hidden="true">🔒</span>
+                            <input 
+                                type="password" 
+                                id="login-contrasena" 
+                                name="contrasena" 
+                                class="form-input" 
+                                placeholder="Ingresa tu contraseña"
+                                autocomplete="current-password"
+                                required
+                            >
+                            <button type="button" class="btn-toggle-pwd" data-target="login-contrasena" aria-label="Mostrar u ocultar contraseña">
+                                👁️
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btn-submit-login" class="btn-primary">
+                        <span class="btn-text">INICIAR SESIÓN</span>
+                        <span class="btn-spinner" aria-hidden="true"></span>
+                    </button>
+                </form>
+
+                <div class="view-footer">
+                    <p class="footer-prompt">¿No tienes una cuenta?</p>
+                    <button type="button" id="btn-go-to-register" class="btn-secondary">
+                        CREAR CUENTA
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= FORMULARIO DE REGISTRO ================= -->
+            <div id="view-register" class="auth-view">
+                <div class="view-header">
+                    <h2 class="view-title">CREAR CUENTA</h2>
+                    <p class="view-desc">Registra un nuevo usuario con cifrado seguro</p>
+                </div>
+
+                <form id="form-register" novalidate autocomplete="on">
+                    <div class="form-group">
+                        <label for="reg-usuario" class="form-label">Usuario</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon" aria-hidden="true">👤</span>
+                            <input 
+                                type="text" 
+                                id="reg-usuario" 
+                                name="usuario" 
+                                class="form-input" 
+                                placeholder="Nombre de usuario deseado"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-contrasena" class="form-label">Contraseña</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon" aria-hidden="true">🔒</span>
+                            <input 
+                                type="password" 
+                                id="reg-contrasena" 
+                                name="contrasena" 
+                                class="form-input" 
+                                placeholder="Crea una contraseña segura"
+                                autocomplete="new-password"
+                                required
+                            >
+                            <button type="button" class="btn-toggle-pwd" data-target="reg-contrasena" aria-label="Mostrar u ocultar contraseña">
+                                👁️
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-confirmar-contrasena" class="form-label">Confirmar contraseña</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon" aria-hidden="true">🔒</span>
+                            <input 
+                                type="password" 
+                                id="reg-confirmar-contrasena" 
+                                name="confirmarContrasena" 
+                                class="form-input" 
+                                placeholder="Repite la contraseña"
+                                autocomplete="new-password"
+                                required
+                            >
+                            <button type="button" class="btn-toggle-pwd" data-target="reg-confirmar-contrasena" aria-label="Mostrar u ocultar confirmación de contraseña">
+                                👁️
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btn-submit-register" class="btn-primary">
+                        <span class="btn-text">REGISTRAR USUARIO</span>
+                        <span class="btn-spinner" aria-hidden="true"></span>
+                    </button>
+                </form>
+
+                <div class="view-footer">
+                    <p class="footer-prompt">¿Ya tienes una cuenta?</p>
+                    <button type="button" id="btn-go-to-login" class="btn-secondary">
+                        INICIAR SESIÓN
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= VISTA DE SESIÓN ACTIVA / DASHBOARD ================= -->
+            <div id="view-dashboard" class="auth-view">
+                <div class="session-card">
+                    <div class="session-avatar" aria-hidden="true">
+                        ✓
+                    </div>
+                    <h2 class="session-title">¡Bienvenido!</h2>
+                    <p class="session-user-badge">
+                        Usuario autenticado: <strong id="session-username-display">---</strong>
+                    </p>
+                    <div class="session-status-box">
+                        <p class="status-indicator">
+                            <span class="dot-online"></span> Autenticado mediante Bcrypt + MongoDB
+                        </p>
+                        <p class="status-desc">
+                            Tus credenciales fueron validadas satisfactoriamente contra el backend REST.
+                        </p>
+                    </div>
+                    <button type="button" id="btn-logout" class="btn-secondary btn-logout">
+                        CERRAR SESIÓN
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Información Técnica en el pie de página -->
+        <footer class="app-footer">
+            <p>Servicios REST: <code>POST /api/auth/register</code> | <code>POST /api/auth/login</code></p>
+            <p>Seguridad: Hashing unidireccional con <code>bcryptjs</code> (10 rondas de sal)</p>
+        </footer>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
